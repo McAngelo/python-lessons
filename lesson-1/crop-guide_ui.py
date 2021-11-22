@@ -55,15 +55,23 @@ class Ui_MainWindow(object):
         self.acres_label = QtWidgets.QLabel(self.groupBox)
         self.acres_label.setGeometry(QtCore.QRect(53, 160, 51, 19))
         font = QtGui.QFont()
-        font.setPointSize(16)
+        font.setPointSize(12)
         self.acres_label.setFont(font)
         self.acres_label.setObjectName("acres_label")
         self.state_comboBox = QtWidgets.QComboBox(self.groupBox)
         self.state_comboBox.setGeometry(QtCore.QRect(130, 68, 140, 26))
         self.state_comboBox.setObjectName("state_comboBox")
+        self.state_comboBox.addItem("Northern")
+        self.state_comboBox.addItem("Volta")
+        self.state_comboBox.addItem("Central")
+        self.state_comboBox.addItem("Western")
+        self.state_comboBox.addItem("Accra")
         self.season_comboBox = QtWidgets.QComboBox(self.groupBox)
         self.season_comboBox.setGeometry(QtCore.QRect(130, 98, 140, 26))
         self.season_comboBox.setObjectName("season_comboBox")
+        self.season_comboBox.addItem("Raining")
+        self.season_comboBox.addItem("Dry")
+        self.season_comboBox.addItem("Hammathan")
         self.season_label = QtWidgets.QLabel(self.groupBox)
         self.season_label.setGeometry(QtCore.QRect(41, 102, 63, 19))
         font = QtGui.QFont()
@@ -79,6 +87,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.submit_pushButton.setFont(font)
         self.submit_pushButton.setObjectName("submit_pushButton")
+        self.submit_pushButton.clicked.connect(self.submit)
         self.cancel_pushButton = QtWidgets.QPushButton(self.groupBox)
         self.cancel_pushButton.setGeometry(QtCore.QRect(216, 200, 79, 32))
         font = QtGui.QFont()
@@ -114,7 +123,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "CROP GUIDE"))
         self.label.setText(_translate("MainWindow", "CROP GUIDE"))
         self.groupBox.setTitle(_translate("MainWindow", "Farm Details"))
         self.budget_label.setText(_translate("MainWindow", "Budget :"))
@@ -127,6 +136,18 @@ class Ui_MainWindow(object):
         self.result_label.setText(_translate("MainWindow", "TextLabel"))
         self.menuCrop_Guide.setTitle(_translate("MainWindow", "Crop Guide"))
 
+    def submit(self):
+        print("Clicked")
+        state = self.state_comboBox.currentText()
+        season = self.season_comboBox.currentText()
+        money = int(self.budget_lineEdit.text())
+        acres = int(self.acres_lineEdit.text())
+
+        print(state)
+        print(season)
+        print(money)
+        print(acres)
+    
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent=parent)
