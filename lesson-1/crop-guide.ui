@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>875</width>
-    <height>749</height>
+    <height>595</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 10);</string>
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -46,6 +46,9 @@
        <pointsize>25</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);</string>
+     </property>
      <property name="text">
       <string>CROP GUIDE</string>
      </property>
@@ -65,13 +68,13 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>25</pointsize>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="title">
      <string>Farm Details</string>
     </property>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="acres_lineEdit">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -81,7 +84,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="budget_label">
      <property name="geometry">
       <rect>
        <x>42</x>
@@ -99,7 +102,7 @@
       <string>Budget :</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="state_label">
      <property name="geometry">
       <rect>
        <x>57</x>
@@ -117,7 +120,7 @@
       <string>State :</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="acres_label">
      <property name="geometry">
       <rect>
        <x>53</x>
@@ -135,7 +138,7 @@
       <string>Acres :</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="state_comboBox">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -145,7 +148,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_2">
+    <widget class="QComboBox" name="season_comboBox">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -155,11 +158,11 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="season_label">
      <property name="geometry">
       <rect>
        <x>41</x>
-       <y>100</y>
+       <y>102</y>
        <width>63</width>
        <height>19</height>
       </rect>
@@ -173,7 +176,7 @@
       <string>Season :</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="budget_lineEdit">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -183,7 +186,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="submit_pushButton">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -192,11 +195,16 @@
        <height>32</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Submit</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="cancel_pushButton">
      <property name="geometry">
       <rect>
        <x>216</x>
@@ -205,8 +213,54 @@
        <height>32</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Cancel</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>140</y>
+      <width>381</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Result</string>
+    </property>
+    <widget class="QLabel" name="result_label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>341</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="result_textEdit">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>341</width>
+       <height>79</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -220,6 +274,12 @@
      <height>24</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCrop_Guide">
+    <property name="title">
+     <string>Crop Guide</string>
+    </property>
+   </widget>
+   <addaction name="menuCrop_Guide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
