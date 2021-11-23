@@ -10,6 +10,9 @@
 
 #from _typeshed import Self
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
+import random
+import sqlite3
 
 
 class Ui_MainWindow(object):
@@ -158,6 +161,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.submit_pushButton.setFont(font)
         self.submit_pushButton.setObjectName("submit_pushButton")
+        self.submit_pushButton.clicked.connect(self.onSubmit)
 
     # Cancel Button
     def cancelBtn(self):
@@ -167,6 +171,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.cancel_pushButton.setFont(font)
         self.cancel_pushButton.setObjectName("cancel_pushButton")
+        self.cancel_pushButton.clicked.connect(self.onCancel)
     
     #Search GroupBox  
     def searchGroupBox(self):
@@ -220,9 +225,21 @@ class Ui_MainWindow(object):
         self.cancel_pushButton_2.setFont(font)
         self.cancel_pushButton_2.setObjectName("cancel_pushButton_2")
 
+    def onSubmit(self):
+        print("submited")
+
+    def onCancel(self):
+        print('Canceled')
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Critical)
+        msgBox.setWindowTitle("Password Manager")
+        msgBox.setText("Wrong password. Please try again!!")
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
+        returnValue = msgBox.exec()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Password Generator"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Password Manager"))
         self.setup_groupBox.setTitle(_translate("MainWindow", "Setup Password"))
         self.userName_label.setText(_translate("MainWindow", "Username :"))
         self.password_label.setText(_translate("MainWindow", "Password :"))
@@ -230,7 +247,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "Keyword :"))
         self.submit_pushButton.setText(_translate("MainWindow", "Submit"))
         self.cancel_pushButton.setText(_translate("MainWindow", "Cancel"))
-        self.top_label.setText(_translate("MainWindow", "Password Generator"))
+        self.top_label.setText(_translate("MainWindow", "Password Manager"))
         self.search_groupBox.setTitle(_translate("MainWindow", "Search"))
         self.password_label_2.setText(_translate("MainWindow", "Passcode :"))
         self.userName_label_2.setText(_translate("MainWindow", "Website :"))
