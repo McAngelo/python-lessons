@@ -135,7 +135,8 @@ class Ui_MainWindow(object):
         self.submit_pushButton.setText(_translate("MainWindow", "Submit"))
         self.cancel_pushButton.setText(_translate("MainWindow", "Cancel"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Result"))
-        self.result_label.setText(_translate("MainWindow", "TextLabel"))
+        #self.result_label.setText(_translate("MainWindow", "TextLabel"))
+        self.result_label.setPixmap(QtGui.QPixmap("img//Tomato.png"))
         self.menuCrop_Guide.setTitle(_translate("MainWindow", "Crop Guide"))
 
     def submit(self):
