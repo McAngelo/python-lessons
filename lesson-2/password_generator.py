@@ -173,61 +173,11 @@ class Ui_MainWindow(object):
         self.cancel_pushButton.setObjectName("cancel_pushButton")
         self.cancel_pushButton.clicked.connect(self.onCancel)
     
-    #Search GroupBox  
-    def searchGroupBox(self):
-        self.search_groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.search_groupBox.setGeometry(QtCore.QRect(410, 100, 361, 291))
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.search_groupBox.setFont(font)
-        self.search_groupBox.setObjectName("search_groupBox")
-        self.passcode_lineEdit = QtWidgets.QLineEdit(self.search_groupBox)
-        self.passcode_lineEdit.setGeometry(QtCore.QRect(140, 90, 191, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.passcode_lineEdit.setFont(font)
-        self.passcode_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.passcode_lineEdit.setObjectName("passcode_lineEdit")
-        self.password_label_2 = QtWidgets.QLabel(self.search_groupBox)
-        self.password_label_2.setGeometry(QtCore.QRect(50, 100, 71, 16))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.password_label_2.setFont(font)
-        self.password_label_2.setObjectName("password_label_2")
-        self.userName_label_2 = QtWidgets.QLabel(self.search_groupBox)
-        self.userName_label_2.setGeometry(QtCore.QRect(60, 50, 61, 16))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.userName_label_2.setFont(font)
-        self.userName_label_2.setObjectName("userName_label_2")
-        self.search_website_lineEdit = QtWidgets.QLineEdit(self.search_groupBox)
-        self.search_website_lineEdit.setGeometry(QtCore.QRect(140, 40, 191, 31))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.search_website_lineEdit.setFont(font)
-        self.search_website_lineEdit.setObjectName("search_website_lineEdit")
-        self.result_textEdit = QtWidgets.QTextEdit(self.search_groupBox)
-        self.result_textEdit.setGeometry(QtCore.QRect(40, 140, 291, 91))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.result_textEdit.setFont(font)
-        self.result_textEdit.setObjectName("result_textEdit")
-        self.search_pushButton = QtWidgets.QPushButton(self.search_groupBox)
-        self.search_pushButton.setGeometry(QtCore.QRect(170, 240, 81, 32))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.search_pushButton.setFont(font)
-        self.search_pushButton.setObjectName("search_pushButton")
-        self.cancel_pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.cancel_pushButton_2.setGeometry(QtCore.QRect(660, 340, 81, 32))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.cancel_pushButton_2.setFont(font)
-        self.cancel_pushButton_2.setObjectName("cancel_pushButton_2")
-
+    # OnSubmit Action
     def onSubmit(self):
         print("submited")
 
+    # OnCancel Action
     def onCancel(self):
         print('Canceled')
         msgBox = QMessageBox()
@@ -237,6 +187,95 @@ class Ui_MainWindow(object):
         msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
         returnValue = msgBox.exec()
 
+    # Search GroupBox  
+    def searchGroupBox(self):
+        self.search_groupBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.search_groupBox.setGeometry(QtCore.QRect(410, 100, 361, 291))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        self.search_groupBox.setFont(font)
+        self.search_groupBox.setObjectName("search_groupBox")
+        # Passcode Input
+        self.passcodeInput()
+        
+        # Search Website Input
+        self.searchWebsiteInput()
+
+        # Result Text
+        self.resultTextbox()
+
+        # Search Button
+        self.searchBtn()
+
+        # Cancel Button
+        self.cancelSearchBtn()
+
+        
+        
+
+    # Search Website Input
+    def searchWebsiteInput(self):
+        self.search_website_label = QtWidgets.QLabel(self.search_groupBox)
+        self.search_website_label.setGeometry(QtCore.QRect(60, 50, 61, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.search_website_label.setFont(font)
+        self.search_website_label.setObjectName("search_website_label")
+        self.search_website_lineEdit = QtWidgets.QLineEdit(self.search_groupBox)
+        self.search_website_lineEdit.setGeometry(QtCore.QRect(140, 40, 191, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.search_website_lineEdit.setFont(font)
+        self.search_website_lineEdit.setObjectName("search_website_lineEdit")
+    
+    # Passcode Input
+    def passcodeInput(self):
+        self.passcode_lineEdit = QtWidgets.QLineEdit(self.search_groupBox)
+        self.passcode_lineEdit.setGeometry(QtCore.QRect(140, 90, 191, 31))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.passcode_lineEdit.setFont(font)
+        self.passcode_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.passcode_lineEdit.setObjectName("passcode_lineEdit")
+        self.passcode_label = QtWidgets.QLabel(self.search_groupBox)
+        self.passcode_label.setGeometry(QtCore.QRect(50, 100, 71, 16))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.passcode_label.setFont(font)
+        self.passcode_label.setObjectName("passcode_label")
+
+    # Result Textbox
+    def resultTextbox(self):
+        print('Result Text Box')
+        self.result_textEdit = QtWidgets.QTextEdit(self.search_groupBox)
+        self.result_textEdit.setGeometry(QtCore.QRect(40, 140, 291, 91))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.result_textEdit.setFont(font)
+        self.result_textEdit.setObjectName("result_textEdit")
+
+    # search Button
+    def searchBtn(self):
+        print('Search Button')
+        self.search_pushButton = QtWidgets.QPushButton(self.search_groupBox)
+        self.search_pushButton.setGeometry(QtCore.QRect(170, 240, 81, 32))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.search_pushButton.setFont(font)
+        self.search_pushButton.setObjectName("search_pushButton")
+        self.search_pushButton.clicked.connect(self.onSubmit)
+    
+    # Cancel Search Button
+    def cancelSearchBtn(self):
+        print('Cancel Search Button')
+        self.cancel_pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.cancel_pushButton_2.setGeometry(QtCore.QRect(660, 340, 81, 32))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.cancel_pushButton_2.setFont(font)
+        self.cancel_pushButton_2.setObjectName("cancel_pushButton_2")
+        self.cancel_pushButton_2.clicked.connect(self.onSubmit)
+    
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Password Manager"))
@@ -249,8 +288,8 @@ class Ui_MainWindow(object):
         self.cancel_pushButton.setText(_translate("MainWindow", "Cancel"))
         self.top_label.setText(_translate("MainWindow", "Password Manager"))
         self.search_groupBox.setTitle(_translate("MainWindow", "Search"))
-        self.password_label_2.setText(_translate("MainWindow", "Passcode :"))
-        self.userName_label_2.setText(_translate("MainWindow", "Website :"))
+        self.passcode_label.setText(_translate("MainWindow", "Passcode :"))
+        self.search_website_label.setText(_translate("MainWindow", "Website :"))
         self.search_pushButton.setText(_translate("MainWindow", "Search"))
         self.cancel_pushButton_2.setText(_translate("MainWindow", "Cancel"))
 
