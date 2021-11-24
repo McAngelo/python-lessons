@@ -1,0 +1,5 @@
+# Password Manager
+pyuic5 -x password_generator.ui -o passwordManager.py
+pip3 install -U py2app
+py2applet --make-setup passwordManager.py password.sqlite images/pass-manager.icns
+python3 setup.py py2app -A

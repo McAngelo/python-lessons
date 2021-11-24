@@ -4,9 +4,9 @@
 .qt_for_python/
 /lesson-1/crop_guide.sqlite
 /lesson-2/password.sqlite
+/lesson-2/build
+/lesson-2/dist
 
-/build
-/dist
 # System Files
 .DS_Store
 Thumbs.db

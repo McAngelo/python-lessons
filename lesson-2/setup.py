@@ -7,11 +7,24 @@ Usage:
 
 from setuptools import setup
 
-APP = ['password_generator.py']
+APP = ['passwordManager.py']
+APP_NAME = "PasswordManager"
 DATA_FILES = ['password.sqlite']
-OPTIONS = {}
+OPTIONS = {
+    #'argv_emulation': True,
+    'iconfile': '/Users/mj-consult/Projects/python-lessons/lesson-2/images/pass-manager.icns',
+    'plist': {
+        'CFBundleName': APP_NAME,
+        'CFBundleDisplayName': APP_NAME,
+        'CFBundleGetInfoString': "Managing your passwords",
+        'CFBundleVersion': "0.1.0",
+        'CFBundleShortVersionString': "0.1.0",
+        'NSHumanReadableCopyright': "Copyright © 2021, Michael Johnson, All Rights Reserved"
+    }
+}
 
 setup(
+    name=APP_NAME,
     app=APP,
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
