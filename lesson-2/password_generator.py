@@ -176,6 +176,89 @@ class Ui_MainWindow(object):
     # OnSubmit Action
     def onSubmit(self):
         print("submited")
+        # User Inputs
+        username = self.username_lineEdit.text()
+        password = self.password_lineEdit.text()
+        website = self.website_lineEdit.text()
+        keyword = self.keyword_lineEdit.text()
+
+        # Checks base conditions
+        hasNumber = False
+        hasUpperCase = False
+        hasLowerCase = False
+        hasSpecialCharacters = False
+        hasAcceptedLength = len(password) >= 8
+        special_characters = '!@#$%^&*()?/|\{[]}~`_-+=><,.'
+
+        print('password'+ password)
+        for i in range(len(password)):
+            char = password[i]
+            if char.isdigit():
+                hasNumber = True
+                print('pass number check')
+            elif char.isupper():
+                hasUpperCase = True
+                print('pass upper check')
+            elif char.islower():
+                hasLowerCase = True
+                print('pass lower check')
+            elif char in special_characters:
+                hasSpecialCharacters = True
+                print('pass special character check')
+        
+        if hasNumber == True and hasUpperCase == True and hasLowerCase == True and hasSpecialCharacters == True and hasAcceptedLength:
+            conn = sqlite3.connect('password.sqlite')
+            cur = conn.cursor()
+            try:
+                task = (username, password, website)
+                result = cur.execute('INSERT INTO password (username, password, website) VALUES (?,?,?)', task)
+                #result = cur.fetchall()
+
+                if result:
+                    print(result)
+                    msgBox = QMessageBox()
+                    msgBox.setIcon(QMessageBox.Information)
+                    msgBox.setText("Entry Successful")#to set a text in Qmessagebox
+                    msgBox.setWindowTitle("Password Manager")
+                    msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+                    returnValue = msgBox.exec()
+                else:
+                    print(result)
+            except:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Critical)
+                msgBox.setWindowTitle("Password Manager")
+                msgBox.setText("An Error Occured, trying to connect to database")
+                msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
+                returnValue = msgBox.exec()
+            conn.commit()
+            conn.close()
+        else:
+            special="!@#$%^&*()?/|\{[]}~`_-+=><,."
+            suggest=""
+            i=0
+            while i<4:
+                #to check whether given keyword by the user has len >8
+                while len(keyword) < 8:
+                    #generates a Alphabet using random numbers generated with a range of ASCII Values
+                    keyword = keyword + chr(random.randint(ord('a'),ord('z')))
+                keyword += str(random.randint(0,9))
+                #used to generate a char in a specfic set of elements
+                keyword+=str(random.choice(special))
+                #to capitalize first letter of word
+                keyword = keyword.capitalize()
+                suggest += keyword + '\n'
+                i= i + 1
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setWindowTitle("Password Manager")
+            msgBox.setText("Your password didn't meet the standards.")
+            s="Your password should meet the conditions mentions below \n 1. At least 1 Uppercase \n 2. At least 1 lower case \n 3. At least 1 number \n 4. At least 1 special character \n 5. At least 8 characters."
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            msgBox.setInformativeText("Password Suggestions: \n"+str(suggest))#show a msg in the qmsg box
+            msgBox.setDetailedText(s)#to create a hide details option in the msg box
+            returnValue = msgBox.exec()
+
 
     # OnCancel Action
     def onCancel(self):
@@ -209,9 +292,6 @@ class Ui_MainWindow(object):
 
         # Cancel Button
         self.cancelSearchBtn()
-
-        
-        
 
     # Search Website Input
     def searchWebsiteInput(self):
@@ -256,26 +336,74 @@ class Ui_MainWindow(object):
 
     # search Button
     def searchBtn(self):
-        print('Search Button')
         self.search_pushButton = QtWidgets.QPushButton(self.search_groupBox)
         self.search_pushButton.setGeometry(QtCore.QRect(170, 240, 81, 32))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.search_pushButton.setFont(font)
         self.search_pushButton.setObjectName("search_pushButton")
-        self.search_pushButton.clicked.connect(self.onSubmit)
+        self.search_pushButton.clicked.connect(self.onSearch)
     
     # Cancel Search Button
     def cancelSearchBtn(self):
-        print('Cancel Search Button')
         self.cancel_pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.cancel_pushButton_2.setGeometry(QtCore.QRect(660, 340, 81, 32))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cancel_pushButton_2.setFont(font)
         self.cancel_pushButton_2.setObjectName("cancel_pushButton_2")
-        self.cancel_pushButton_2.clicked.connect(self.onSubmit)
+        self.cancel_pushButton_2.clicked.connect(self.onCancelSearch)
     
+    # OnSearch Action
+    def onSearch(self):
+        passcode = self.passcode_lineEdit.text()
+        website = self.search_website_lineEdit.text()
+
+        # if users enters root only the search buttons works
+        if passcode == 'root':
+            conn = sqlite3.connect('password.sqlite')
+            cur = conn.cursor()
+            try:
+                # fetching username and password using website name
+                cur.execute("SELECT * FROM password WHERE web=?", [website])
+
+                results = cur.fetchall()
+
+                if results:
+                    print(results)
+                else:
+                    print(results)
+
+                for result in results:
+                    print(result)
+                self.result_textEdit.setText(" Username \t Password \n\n " + str(results[-1][0]) + "\t" + str(results[-1][1]))
+            except:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Critical)
+                msgBox.setWindowTitle("Password Manager")
+                msgBox.setText("An Error Occured, trying to connect to database")
+                msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
+                returnValue = msgBox.exec()
+
+            conn.commit()
+            conn.close()
+        else:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Critical)
+            msgBox.setWindowTitle("Password Manager")
+            msgBox.setText("Wrong password. Please try again!!")
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
+            returnValue = msgBox.exec()
+
+    # OnCancel Action
+    def onCancelSearch(self):
+        msgBox = QMessageBox()
+        msgBox.setIcon(QMessageBox.Critical)
+        msgBox.setWindowTitle("Password Manager")
+        msgBox.setText("Wrong password. Please try again!!")
+        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
+        returnValue = msgBox.exec()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Password Manager"))

@@ -1,0 +1,11 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# local sqlite databases
+.qt_for_python/
+/lesson-1/crop_guide.sqlite
+/lesson-2/password.sqlite
+
+
+# System Files
+.DS_Store
+Thumbs.db
