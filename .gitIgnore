@@ -5,7 +5,8 @@
 /lesson-1/crop_guide.sqlite
 /lesson-2/password.sqlite
 
-
+/build
+/dist
 # System Files
 .DS_Store
 Thumbs.db
