@@ -190,7 +190,6 @@ class Ui_MainWindow(object):
         hasAcceptedLength = len(password) >= 8
         special_characters = '!@#$%^&*()?/|\{[]}~`_-+=><,.'
 
-        print('password'+ password)
         for i in range(len(password)):
             char = password[i]
             if char.isdigit():
@@ -262,13 +261,10 @@ class Ui_MainWindow(object):
 
     # OnCancel Action
     def onCancel(self):
-        print('Canceled')
-        msgBox = QMessageBox()
-        msgBox.setIcon(QMessageBox.Critical)
-        msgBox.setWindowTitle("Password Manager")
-        msgBox.setText("Wrong password. Please try again!!")
-        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
-        returnValue = msgBox.exec()
+        self.username_lineEdit.setText('')
+        self.password_lineEdit.setText('')
+        self.website_lineEdit.setText('')
+        self.keyword_lineEdit.setText('')
 
     # Search GroupBox  
     def searchGroupBox(self):
@@ -365,7 +361,7 @@ class Ui_MainWindow(object):
             cur = conn.cursor()
             try:
                 # fetching username and password using website name
-                cur.execute("SELECT * FROM password WHERE web=?", [website])
+                cur.execute("SELECT * FROM password WHERE website=?", [website])
 
                 results = cur.fetchall()
 
@@ -397,12 +393,9 @@ class Ui_MainWindow(object):
 
     # OnCancel Action
     def onCancelSearch(self):
-        msgBox = QMessageBox()
-        msgBox.setIcon(QMessageBox.Critical)
-        msgBox.setWindowTitle("Password Manager")
-        msgBox.setText("Wrong password. Please try again!!")
-        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
-        returnValue = msgBox.exec()
+        self.result_textEdit.setText('')
+        self.passcode_lineEdit.setText('')
+        self.search_website_lineEdit.setText('')
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
