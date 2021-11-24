@@ -11,7 +11,6 @@ APP = ['passwordManager.py']
 APP_NAME = "PasswordManager"
 DATA_FILES = ['password.sqlite']
 OPTIONS = {
-    #'argv_emulation': True,
     'iconfile': '/Users/mj-consult/Projects/python-lessons/lesson-2/images/pass-manager.icns',
     'plist': {
         'CFBundleName': APP_NAME,
@@ -29,4 +28,10 @@ setup(
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
+    version='1.0',
+    description='Managing your passwords',
+    author='Michael Johnson',
+    author_email='mcangelo200@gmail.com',
+    url='https://www.codeAfric.com',
+    
 )
