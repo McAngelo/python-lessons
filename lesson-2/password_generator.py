@@ -252,11 +252,13 @@ class Ui_MainWindow(object):
             msgBox.setIcon(QMessageBox.Information)
             msgBox.setWindowTitle("Password Manager")
             msgBox.setText("Your password didn't meet the standards.")
-            s="Your password should meet the conditions mentions below \n 1. At least 1 Uppercase \n 2. At least 1 lower case \n 3. At least 1 number \n 4. At least 1 special character \n 5. At least 8 characters."
+            suggestion="Your password should meet the conditions mentions below \n 1. At least 1 Uppercase \n 2. At least 1 lower case \n 3. At least 1 number \n 4. At least 1 special character \n 5. At least 8 characters."
             msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            msgBox.setInformativeText("Password Suggestions: \n"+str(suggest))#show a msg in the qmsg box
-            msgBox.setDetailedText(s)#to create a hide details option in the msg box
-            returnValue = msgBox.exec()
+            #show a msg in the qmsg box
+            msgBox.setInformativeText("Password Suggestions: \n"+str(suggest))
+            #to create a hide details option in the msg box
+            msgBox.setDetailedText(suggestion)
+            msgBox.exec()
 
 
     # OnCancel Action
@@ -369,17 +371,21 @@ class Ui_MainWindow(object):
                     print(results)
                 else:
                     print(results)
-
+                message="Username \t Password \n\n"
+            
+                #show a msg in the qmsg box
+                #msgBox.setInformativeText("Password Suggestions: \n"+str(suggest))
                 for result in results:
-                    print(result)
-                self.result_textEdit.setText(" Username \t Password \n\n " + str(results[-1][0]) + "\t" + str(results[-1][1]))
+                    message += str(result[0]) + "\t" + str(result[1]) + "\n"
+                
+                self.result_textEdit.setText("Passsword Info \n=============\n\n" + message)
             except:
                 msgBox = QMessageBox()
                 msgBox.setIcon(QMessageBox.Critical)
                 msgBox.setWindowTitle("Password Manager")
                 msgBox.setText("An Error Occured, trying to connect to database")
                 msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
-                returnValue = msgBox.exec()
+                msgBox.exec()
 
             conn.commit()
             conn.close()
@@ -389,7 +395,7 @@ class Ui_MainWindow(object):
             msgBox.setWindowTitle("Password Manager")
             msgBox.setText("Wrong password. Please try again!!")
             msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)    
-            returnValue = msgBox.exec()
+            msgBox.exec()
 
     # OnCancel Action
     def onCancelSearch(self):
