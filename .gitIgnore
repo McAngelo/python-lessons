@@ -6,6 +6,7 @@
 /lesson-2/password.sqlite
 /lesson-2/build
 /lesson-2/dist
+/newsapp/db.sqlite3
 
 # System Files
 .DS_Store
